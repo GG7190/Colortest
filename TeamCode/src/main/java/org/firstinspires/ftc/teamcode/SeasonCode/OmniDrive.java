@@ -1,16 +1,15 @@
 package org.firstinspires.ftc.teamcode.SeasonCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.SeasonCode.GGHardware;
-import org.firstinspires.ftc.teamcode.SeasonCode.GGParameters;
+import org.firstinspires.ftc.teamcode.SeasonCode.GGHardware;
 
-    @TeleOp(name="WorldsTeleop",group="TeleOp")
-    public class TeleOp extends LinearOpMode
+
+@TeleOp(name="OmniDrive",group="TeleOp")
+    public class OmniDrive extends LinearOpMode
     {
 
         GGHardware robot = new GGHardware();
@@ -19,8 +18,8 @@ import org.firstinspires.ftc.teamcode.SeasonCode.GGParameters;
 
         @Override
         public void runOpMode() {
-            GGParameters parameters = new GGParameters(this);
-            robot.init(parameters);
+            //GGParameters parameters = new GGParameters(this);
+            robot.init(hardwareMap);
             waitForStart();
             while (opModeIsActive()) {
 

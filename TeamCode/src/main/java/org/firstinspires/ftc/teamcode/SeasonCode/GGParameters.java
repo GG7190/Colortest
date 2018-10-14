@@ -2,8 +2,12 @@ package org.firstinspires.ftc.teamcode.SeasonCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-public class GGParameters {
+/**
+ * Created by Robert on 1/6/2018.
+ */
 
+public class GGParameters
+{
     public LinearOpMode BaseOpMode = null;
 
     public boolean InitMotors = true;
@@ -23,4 +27,5 @@ public class GGParameters {
         BaseOpMode= baseOpMode;
         baseInit();
     }
+
 }

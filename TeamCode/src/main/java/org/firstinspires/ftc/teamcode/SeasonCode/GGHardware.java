@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+
+
 public class GGHardware {
 
     GGParameters _parameters = null;
@@ -18,33 +20,27 @@ public class GGHardware {
     DistanceSensor sensorDistance;
 
     /* Local OP Mode Members*/
-    HardwareMap hwMap = null;
+    HardwareMap hwMap  = null;
     public LinearOpMode BaseOpMode = null;
     private ElapsedTime runtime = new ElapsedTime();
 
-    public DcMotor frontLeft, frontRight, backLeft, backRight, collector, lift;
-    public Servo release, hookDelivery, lander;
+    public DcMotor frontLeft, frontRight, backLeft, backRight;
 
-    public void init(GGParameters parameters /*HardwareMap ahwMap*/) {
-        _parameters = parameters;
-        hwMap = parameters.BaseOpMode.hardwareMap;/*ahwMap*/
-        BaseOpMode = parameters.BaseOpMode;
+    public GGHardware()
+    {
 
-        frontLeft = hwMap.get(DcMotor.class, "FL");
-        frontRight = hwMap.get(DcMotor.class, "FR");
-        backLeft = hwMap.get(DcMotor.class, "BL");
-        backRight = hwMap.get(DcMotor.class, "BR");
-        lift = hwMap.get(DcMotor.class, "lift");
+    }
 
-        }
+    public void init(HardwareMap ahwMap) {
 
-        public void liftUp()
-        {
-            lift.setPower(1.00);
-        }
+        hwMap = ahwMap;
+        //Four wheels
+        frontLeft = hwMap.get(DcMotor.class, "fl");
+        frontRight = hwMap.get(DcMotor.class, "fr");
+        backLeft = hwMap.get(DcMotor.class, "bl");
+        backRight = hwMap.get(DcMotor.class, "br");
 
-        public void liftDown()
-        {
-            lift.setPower(-1.00);
-        }
+
+    }
+
 }
