@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.SeasonCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -11,45 +12,50 @@ import org.firstinspires.ftc.teamcode.SeasonCode.GGHardware;
 @TeleOp(name="OmniDrive",group="TeleOp")
     public class OmniDrive extends LinearOpMode
     {
-
         GGHardware robot = new GGHardware();
         private ElapsedTime  runtime= new ElapsedTime();
 
 
         @Override
         public void runOpMode() {
-            //GGParameters parameters = new GGParameters(this);
-            robot.init(hardwareMap);
-            waitForStart();
-            while (opModeIsActive()) {
 
-                // left stick controls direction
-                // right stick X controls rotation
+                    //GGParameters parameters = new GGParameters(this);
+                    robot.init(hardwareMap);
+                    waitForStart();
+                    while (opModeIsActive()) {
 
-                float gamepad1LeftY = -gamepad1.left_stick_y;
-                float gamepad1LeftX = gamepad1.left_stick_x;
-                float gamepad1RightX = gamepad1.right_stick_x;
+                    //recieve joystick values from controllers
+                    getJoyVals();
 
-                // holonomic formulas
-
-                float FrontLeft = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
-                float FrontRight = gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
-                float BackRight = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
-                float BackLeft = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
-
-                // clip the right/left values so that the values never exceed +/- 1
-                FrontRight = Range.clip(FrontRight, -1, 1);
-                FrontLeft = Range.clip(FrontLeft, -1, 1);
-                BackLeft = Range.clip(BackLeft, -1, 1);
-                BackRight = Range.clip(BackRight, -1, 1);
-
-                // write the values to the motors
-                robot.frontRight.setPower(FrontRight);
-                robot.frontLeft.setPower(FrontLeft);
-                robot.backLeft.setPower(BackLeft);
-                robot.backRight.setPower(BackRight);
-
+                    // assign the power values to the motors
+                    robot.frontRight.setPower(robot.FRPower);
+                    robot.frontLeft.setPower(robot.FLPower);
+                    robot.backLeft.setPower(robot.BLPower);
+                    robot.backRight.setPower(robot.BRPower);
 
             }
+
+
+
+        }
+        public void getJoyVals ()
+        {
+            float gamepad1LeftY = -gamepad1.left_stick_y;
+            float gamepad1LeftX = gamepad1.left_stick_x;
+            float gamepad1RightX = gamepad1.right_stick_x;
+
+            robot.FLPower = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
+            robot.FRPower = gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
+            robot.BRPower = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
+            robot.BLPower = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
+
+            if (Math.abs(gamepad1LeftY) < robot.deadZone && Math.abs(gamepad1LeftX) < robot.deadZone && Math.abs(gamepad1RightX) < robot.deadZone )
+            {
+                robot.FLPower = 0;
+                robot.FRPower = 0;
+                robot.BRPower = 0;
+                robot.BLPower = 0;
             }
         }
+
+    }
