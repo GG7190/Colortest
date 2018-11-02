@@ -46,7 +46,7 @@ public class GGHardware {
         backLeft = hwMap.get(DcMotor.class, "bl");
         backRight = hwMap.get(DcMotor.class, "br");
 
-        frontRight.setDirection(DcMotor.Direction.REVERSE);
+        //frontRight.setDirection(DcMotor.Direction.REVERSE);
 
 
     }
